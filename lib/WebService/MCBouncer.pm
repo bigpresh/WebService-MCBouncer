@@ -68,18 +68,8 @@ has user_agent => (
 
 Given a username, returns details of any bans for that user.
 
-Returns the raw JSON response from the MCBouncer API, which at the current time
-includes:
-
-=over
-
-=item totalcount
-
-The total number of bans recorded
-
-=item data
-
-An arrayref of details of each ban, each being a hashref of:
+Returns a list or arrayref of ban details, each of which 
+at the current time will contain:
 
 =over
 
@@ -105,16 +95,6 @@ The username of the person who placed this ban.
 
 =back
 
-=item page
-
-The page number.  I don't know how paging with the MCBouncer API works yet.
-
-=item success
-
-Indicates whether the the API call succeeded.
-
-=back
-
 =cut
 
 sub bans {
@@ -129,27 +109,19 @@ sub bans {
 
     my $result = JSON::from_json($response->decoded_content);
 
+    if (!$result->{success}) {
+        die "mcbouncer response indicated error";
+    }
     return unless $result->{totalcount};
-    return $result;
+    return wantarray ? @{ $result->{data} } : $result->{data};
 }
 
 =head2 notes
 
 Given a username, returns details of any notes recorded for that user.
 
-Returns the raw JSON response from the MCBouncer API, which at the current time
-includes:
-
-=over
-
-=item totalcount
-
-The total number of notes recorded.  (If this is 0, C<notes> will return undef,
-so you can use it in a conditional sensibly.)
-
-=item data
-
-An arrayref of details of each note, each being a hashref of:
+Returns an array or arrayref of hashrefs describing each note, each
+of which at the current time includes:
 
 =over
 
@@ -179,16 +151,6 @@ The ID of this note
 
 =back
 
-=item page
-
-The page number.  I don't know how paging with the MCBouncer API works yet.
-
-=item success
-
-Indicates whether the API call succeeded.
-
-=back
-
 =cut
 
 sub notes {
@@ -202,11 +164,12 @@ sub notes {
     }
 
     my $result = JSON::from_json($response->decoded_content);
-    return $result;
+    if (!$result->{success}) {
+        die "mcbouncer response indicated error";
+    }
+    return unless $result->{totalcount};
+    return wantarray ? @{ $result->{data} } : $result->{data};
 }
-=head2 function2
-
-=cut
 
 =head1 AUTHOR
 
