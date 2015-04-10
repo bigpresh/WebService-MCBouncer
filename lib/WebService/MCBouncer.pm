@@ -113,6 +113,8 @@ The page number.  I don't know how paging with the MCBouncer API works yet.
 
 Indicates whether the the API call succeeded.
 
+=back
+
 =cut
 
 sub bans {
@@ -184,6 +186,8 @@ The page number.  I don't know how paging with the MCBouncer API works yet.
 =item success
 
 Indicates whether the API call succeeded.
+
+=back
 
 =cut
 
