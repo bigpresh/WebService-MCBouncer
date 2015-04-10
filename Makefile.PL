@@ -18,9 +18,9 @@ WriteMakefile(
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        Moo => 0,
-        LWP::UserAgent => 0,
-        JSON => 0,
+        'Moo' => 0,
+        'LWP::UserAgent' => 0,
+        'JSON' => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WebService-MCBouncer-*' },
