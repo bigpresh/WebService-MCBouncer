@@ -37,76 +37,48 @@ Methods
   bans
     Given a username, returns details of any bans for that user.
 
-    Returns the raw JSON response from the MCBouncer API, which at the
-    current time includes:
+    Returns a list or arrayref of ban details, each of which at the current
+    time will contain:
 
-    totalcount
-        The total number of bans recorded
+    username
+        The username banned
 
-    data
-        An arrayref of details of each ban, each being a hashref of:
+    reason
+        The reason for the ban
 
-        username
-            The username banned
+    server
+        The ban this server is from
 
-        reason
-            The reason for the ban
+    time
+        The date and time the ban was recorded, e.g.
+        `2015-04-10T00:59:31.280'
 
-        server
-            The ban this server is from
-
-        time
-            The date and time the ban was recorded, e.g.
-            `2015-04-10T00:59:31.280'
-
-        issuer
-            The username of the person who placed this ban.
-
-    page
-        The page number. I don't know how paging with the MCBouncer API
-        works yet.
-
-    success
-        Indicates whether the the API call succeeded.
+    issuer
+        The username of the person who placed this ban.
 
   notes
     Given a username, returns details of any notes recorded for that user.
 
-    Returns the raw JSON response from the MCBouncer API, which at the
-    current time includes:
+    Returns an array or arrayref of hashrefs describing each note, each of
+    which at the current time includes:
 
-    totalcount
-        The total number of notes recorded. (If this is 0, `notes' will
-        return undef, so you can use it in a conditional sensibly.)
+    username
+        The username the note applies to
 
-    data
-        An arrayref of details of each note, each being a hashref of:
+    note
+        The text of the note
 
-        username
-            The username the note applies to
+    server
+        The ban this note is from
 
-        note
-            The text of the note
+    time
+        The date and time the note was added, e.g. `2015-04-10T00:59:31.280'
 
-        server
-            The ban this note is from
+    issuer
+        The username of the person who added this note
 
-        time
-            The date and time the note was added, e.g.
-            `2015-04-10T00:59:31.280'
-
-        issuer
-            The username of the person who added this note
-
-        noteid
-            The ID of this note
-
-    page
-        The page number. I don't know how paging with the MCBouncer API
-        works yet.
-
-    success
-        Indicates whether the API call succeeded.
+    noteid
+        The ID of this note
 
 AUTHOR
     David Precious, `<davidp at preshweb.co.uk>'
