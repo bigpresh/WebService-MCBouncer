@@ -24,4 +24,11 @@ WriteMakefile(
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'WebService-MCBouncer-*' },
+    META_MERGE => {
+        resources => {
+            repository => 'https://github.com/bigpresh/WebService-MCBouncer',
+            bugtracker => 'https://github.com/bigpresh/WebService-MCBouncer/issues',
+            homepage   => 'https://github.com/bigpresh/WebService-MCBouncer/',
+        },  
+    },
 );
